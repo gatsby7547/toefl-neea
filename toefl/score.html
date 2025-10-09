@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://toefl.neea.cn/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://at.alicdn.com">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_5034223_7dimeuvenrs.css" media="print" onload="this.media='all'">
+    <title>我的托福网考成绩 - 教育部教育考试院网上报名</title>
+    <style>
+        /* 移动端适配样式 - 使用类选择器 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 为整个页面添加20px边距，适配手机浏览器显示 */
+        body {
+            padding: 10px 20px; /* 四边都添加20px的内边距 */
+            background-color: #FFF;
+            /* 确保页面内容不会超出视口 */
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        .page-body {
+            background-color: #FFF;
+        }
+
+        /* 顶部导航栏样式 */
+        nav { 
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 75px;
+            background-color: #fff;
+            /* 使用Flexbox布局让子元素并排显示 */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 0px;
+        }
+        
+        /* 菜单按钮样式 */
+        .menu-button { 
+            border: .5px solid #ccc;
+            cursor: pointer;
+            /* 鼠标悬停时,调整按钮大小 */
+            transform: scale(0.9);
+        }
+        .menu-button button {
+            font-size: 20px; /* 稍微减小字体大小 */
+            font-weight: 500;
+            background-color: #fff;
+            color: #000;
+            padding: 6px 5px; /* 调整内边距 */
+        }
+        
+        /* 背景图/Logo样式 */
+        .bg-logo { 
+            width: 150px; /* 调整宽度 */
+            height: 80px;
+        }
+        .bg-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* 用户区域样式（购物车和个人中心） */
+        .user {
+            display: flex;
+            gap: 5px; /* 图标之间的间距 */
+        }
+        .user button {
+            font-size: 28px; /* 调整图标大小 */
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #000;
+            padding: 5px;
+        }
+
+        main { 
+            width: 100%;
+            margin: 10px 0;
+        }
+        .score-title { 
+            width: 100%;
+            /* height: 50px; */
+            background-color: #fff;
+            
+        }
+        .title-score h1 { 
+            /* font-size: 20px; */
+            font-weight: 700;
+        }
+        
+        /* title-info样式定义 - 字体大小调整 */
+        .title-info {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            /* i标签字体图标大小调整为18px */
+            /* span标签和a标签中的字体大小调整为12px */
+        }
+        .title-info i {
+            font-size: 22px; /* 图标字体大小调整为18px */
+            font-weight: 500;
+            margin: 0 5px 0 0;
+        }
+        .title-info span,
+        .title-info a {
+            margin-left: 0px;
+            font-size: 14px;
+            color: #000; /* span和a标签字体大小调整为12px */
+        }
+        
+        .test-info { 
+            width: 100%;
+            margin: 15px 0;
+            border: 1px solid #666;
+            border-radius: 5px;
+        }
+        .test-date { 
+            margin: 5px;
+            padding: 5px;
+        }
+        .test-date h3 { 
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .total-score { 
+            padding: 5px;
+        }
+        .total-score-title { 
+            margin-top: 20px;
+            /* margin: 5px auto; */
+            text-align: center;
+        }
+
+        .total-score-title h3 {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        /* 进度条 */
+        /* 基础样式设置 */
+        .progress-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 10vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        /* 进度条容器 */
+        .progress-container {
+            position: relative;
+            width: 200px; /* 默认宽度 */
+            max-width: 80%; /* 在移动设备上自适应 */
+        }
+        
+        /* SVG样式 */
+        .progress-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 进度条背景（未完成部分） */
+        .progress-background {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 13px;
+        }
+        
+        /* 进度条前景（已完成部分） */
+        .progress-foreground {
+            fill: none;
+            stroke: #4E4E8E; /* 深蓝色 */
+            stroke-width: 13px;
+            /* 进度条的端点为直角 */
+            stroke-linecap: butt;
+            /* 进度变化时的过渡动画效果 */
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        /* 中心文本 */
+        .progress-text {
+            position: absolute;
+            top: 70%; /* 调整文本位置使其位于半圆中心 */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: #003366;
+        }
+        .progress-text-sub { 
+            font-size: 12px;
+            font-weight: normal;
+            position: absolute; /* 使用绝对定位 */
+            top: 80%; /* 调整到102的正下方 */
+            left: 50%; /* 水平居中 */
+            transform: translateX(-50%); /* 水平居中 */
+            text-align: center; /* 文本居中 */
+            width: 100%; /* 确保文本容器宽度 */
+            margin-top: 0px;
+        }
+
+        .sub { 
+            display: flex;
+            /* flex-direction: column; */
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 0px;
+        }
+        .sub-score { 
+            display: inline-block;
+            width:150px;
+            height: 120px;
+            margin: 10px 0;
+            padding: 0 0;
+            border-radius: 5px;
+            /* border: 1px solid #000; */
+        }
+        .sub-score-title { 
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+        .sub-score-title i { 
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .sub-score-title span { 
+            font-size: 18px;
+            font-weight: 400;
+        }
+        .sub-score-content { 
+            height: 90px;
+            /* text-align: center; */
+            background-color: #D9DCFF;
+            border-radius: 5px;
+            /* 垂直居中显示p标签和span标签内容 */
+            display: flex; /* 使用flex布局实现垂直居中 */
+            flex-direction: column; /* 垂直方向排列 */
+            justify-content: center; /* 垂直居中 */
+            align-items: center; /* 水平居中 */
+        }
+        .sub-score-content p { 
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .sub-score-content span { 
+            font-size: 14px;
+        }
+
+        .best-score-title { 
+            margin-top: 0px;
+        }
+        .best-score-title h1 {
+            font-style: italic;
+            font-weight: 700;
+        }
+        .best-test-info { 
+            width: 100%;
+            margin: 15px 0;
+            border: 1px solid #666;
+            border-radius: 5px;
+        }
+        .best-test-tag { 
+            width: 100%;
+            margin-top: 5px;
+        }
+        .best-test-tag i { 
+            width: 1em;
+            height: 1.5em;
+            font-size: 32px;
+            text-align: left;
+            color: #F09066;
+            float: left;
+            margin: 0;
+        }
+        .best-test-date { 
+            font-size: 18px;
+            text-align: left;
+            font-weight: 700;
+        }
+        .best-test-desc { 
+            font-size: 16px;
+            text-align: left;
+            /* color: #666; */
+        }
+        .best-test-sum { 
+            width: 80%;
+            margin: 10px auto;
+            padding: 20px 5px;
+            border: 1px solid #222;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .best-test-sum-title { 
+            font-size: 16px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .best-test-sum-score { 
+            font-size: 18px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .best-test-sum span { 
+            font-size: 14px;
+        }
+
+        .best-sub { 
+            display: flex;
+            /* flex-direction: column; */
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 0px;
+        }
+        .best-test-sub {
+            display: inline-block;
+            width:150px;
+            height: 180px;
+            margin: 10px 0;
+            padding: 0 0;
+            border-radius: 5px;
+            /* border: 1px solid #000; */
+        }
+        .best-test-sub-title {
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+        .best-test-sub-title i { 
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .best-test-sub-title span { 
+            font-size: 18px;
+            font-weight: 400;
+        }
+        .best-test-sub-content { 
+            height: 90px;
+            /* text-align: center; */
+            background-color: #FEDAC9;
+            border-radius: 5px;
+            /* 垂直居中显示p标签和span标签内容 */
+            display: flex; /* 使用flex布局实现垂直居中 */
+            flex-direction: column; /* 垂直方向排列 */
+            justify-content: center; /* 垂直居中 */
+            align-items: center; /* 水平居中 */
+        }
+        .best-test-sub-content p { 
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .best-test-sub-content span { 
+            font-size: 14px;
+        }
+        .best-test-sub-data-info { 
+            height: 60px;
+            text-align: center;
+            font-size: 16px;
+            display: flex; /* 使用flex布局实现垂直居中 */
+            flex-direction: column; /* 垂直方向排列 */
+            justify-content: center; /* 垂直居中 */
+            align-items: center;
+        }
+
+        /* 返回主页按钮样式 */
+        .bt-back {
+            width: 85%; /* 设置按钮宽度为95% */
+            margin: 40px auto 10px auto; /* 上下边距20px，水平居中 */
+            text-align: center; /* 文本居中 */
+        }
+        .bt-back button {
+            width: 100%; /* 按钮宽度充满容器 */
+            height: 40px; /* 设置按钮高度为30px */
+            background-color: #000; /* 设置背景色为黑色 */
+            border: none; /* 去掉边框 */
+            border-radius: 5px; /* 添加圆角 */
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
+        .bt-back button a {
+            color: #fff; /* 设置链接文字颜色为白色 */
+            text-decoration: none; /* 去掉下划线 */
+            font-size: 14px; /* 设置字体大小 */
+            font-weight: 400; /* 设置字体粗细 */
+            margin: auto 0;
+            line-height: 40px; /* 行高等于按钮高度，实现垂直居中 */
+        } 
+        .bt-back button i { 
+            font-size: 18px;
+            font-weight: 300;
+            color: #fff;
+            line-height: 40px;
+            margin-left: 10px;
+        }
+        
+
+        .back { 
+            text-align: left;
+            margin-top: 0;
+        }
+        .back button { 
+            display: inline-block;
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .back button a { 
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1.6px;
+        }
+        .first-title { 
+            text-align: center;
+            font-size: 14px;
+            margin: 30px auto 40px auto;
+        }
+
+        .pdf {
+            text-align: center;
+            margin: 15px auto;
+        }
+        .pdf button { 
+            display: inline-block;
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .pdf button i { 
+            font-size: 22px;
+            font-weight: 500;
+            color: #000;
+            /* line-height: 40px; */
+            /* margin-right: 10px; */
+        }
+        .pdf button span { 
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- 顶部菜单按钮 -->
+        <div class="menu-button">
+           <button class="iconfont icon-ego-menu">MENU</button>
+        </div>
+        
+        <!-- 顶部背景图 -->
+        <div class="bg-logo">
+            <a href="#"><img src="img/ETSlogo.jpg" alt="ETS Logo" loading="lazy" width="150" height="80"></a>
+        </div>
+        
+        <!-- 顶部购物车和个人中心 -->
+        <div class="user">
+            <button class="iconfont icon-gouwuche3"></button>
+            <button class="iconfont icon-gerenzhongxin1"></button>
+        </div>
+    </nav>
+
+    <main>
+        <div>
+            <div class="back">
+                <button>
+                    <a href="home-1.html"><< BACK</a>
+                </button>
+            </div>
+            <div class="first-title">
+                <h1>My TOEFLiBT Scores</h1>
+            </div>
+        </div>
+        <!-- 标题 My Score -->
+        <div class="score-title">
+            <div class="title-score">
+                <h1>My Score</h1>
+            </div>
+            <div class="title-info">
+                <i class="iconfont icon-gantanhao1"></i>
+                <span>More information about</span>
+                <a href="#">Understanding Your Score</a>
+            </div>
+        </div>
+
+        <!-- 分数详情 -->
+        <div class="test-info">
+            <!-- 日期 -->
+            <div class="test-date">
+                <h3>Test Date: October 15, 2025</h3>
+            </div>
+
+            <!-- 总分 -->
+            <div class="total-score">
+                <div class="total-score-title">
+                    <h3>Total Score</h3>
+                </div>
+
+                <!-- 进度条 -->
+                <div class="progress-body">
+                    <div class="progress-container">
+                        <!-- SVG进度条 -->
+                        <svg class="progress-svg" viewBox="0 0 120 60">
+                            <!-- 背景圆弧（未完成部分） -->
+                            <path class="progress-background" d="M20,50 A40,40 0 0 1 100,50" />
+                            <!-- 前景圆弧（已完成部分） -->
+                            <path class="progress-foreground" d="M20,50 A40,40 0 0 1 100,50" />
+                        </svg>
+                        <!-- 中心百分比文本 -->
+                        <div class="progress-text">102</div>
+                        <span class="progress-text-sub">Out of 120</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 科目 读 -->
+            <div class="sub">
+                <div class="sub-score">
+                    <div class="sub-score-title">
+                        <i class="iconfont icon-shuben"></i>
+                        <span>Reading</span>
+                    </div>
+
+                    <div class="sub-score-content">
+                        <p>28</p>
+                        <span>Out of 30</span>
+                    </div>
+                </div>
+
+                <!-- 科目 听 -->
+                <div class="sub-score">
+                    <div class="sub-score-title">
+                        <i class="iconfont icon-headphoneserji"></i>
+                        <span>Listening</span>
+                    </div>
+
+                    <div class="sub-score-content">
+                        <p>20</p>
+                        <span>Out of 30</span>
+                    </div>
+                </div>
+
+                <!-- 科目 说 -->
+                <div class="sub-score">
+                    <div class="sub-score-title">
+                        <i class="iconfont icon-maikefeng1"></i>
+                        <span>Speaking</span>
+                    </div>
+
+                    <div class="sub-score-content">
+                        <p>20</p>
+                        <span>Out of 30</span>
+                    </div>
+                </div>
+
+                <!-- 科目 写 -->
+                <div class="sub-score">
+                    <div class="sub-score-title">
+                        <i class="iconfont icon-bi1"></i>
+                        <span>Writing</span>
+                    </div>
+
+                    <div class="sub-score-content">
+                        <p>26</p>
+                        <span>Out of 30</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 标题 MyBestTMScores -->
+        <div>
+            <div class="best-score-title">
+                <h1>MyBest™Scores</h1>
+            </div>
+        </div>
+
+        <!-- 分数详情 -->
+        <div class="best-test-info">
+            <!-- 标签 -->
+            <div class="best-test-tag">
+                <i class="iconfont icon-shoucangshuqian"></i>
+                <p class="best-test-date">As of October 15, 2025</p>
+                <p class="best-test-desc">Your highest section scores from all valid test dates are shown below.</p>
+            </div>
+
+            <!-- 最高分数部分 -->
+            <div class="best-test-sum">
+                <p class="best-test-sum-title">Sum of Highest Section Scores</p>
+                <p class="best-test-sum-score">94</p>
+                <span>Out of 120</span>
+            </div>
+
+            <div class="best-sub">
+                <!-- 科目 读 --> 
+                <div class="best-test-sub">
+                    <div class="best-test-sub-title">
+                        <i class="iconfont icon-shuben"></i>
+                        <span>Reading</span>
+                    </div>
+
+                    <div class="best-test-sub-content">
+                        <p>28</p>
+                        <span>Out of 30</span>
+                    </div>
+                    <div class="best-test-sub-data-info">
+                        <p class="best-test-sub-date">Test Date</p>
+                        <p class="best-test-sub-date-desc">October 15, 2025</p>
+                    </div>
+                </div>
+
+                <!-- 科目 听 -->
+                <div class="best-test-sub">
+                    <div class="best-test-sub-title">
+                        <i class="iconfont icon-headphoneserji"></i>
+                        <span>Listening</span>
+                    </div>
+
+                    <div class="best-test-sub-content">
+                        <p>20</p>
+                        <span>Out of 30</span>
+                    </div>
+                    <div class="best-test-sub-data-info">
+                        <p class="best-test-sub-date">Test Date</p>
+                        <p class="best-test-sub-date-desc">October 15, 2025</p>
+                    </div>
+                </div>
+
+                <!-- 科目 说 -->
+                <div class="best-test-sub">
+                    <div class="best-test-sub-title">
+                        <i class="iconfont icon-maikefeng1"></i>
+                        <span>Speaking</span>
+                    </div>
+
+                    <div class="best-test-sub-content">
+                        <p>20</p>
+                        <span>Out of 30</span>
+                    </div>
+                   <div class="best-test-sub-data-info">
+                        <p class="best-test-sub-date">Test Date</p>
+                        <p class="best-test-sub-date-desc">October 15, 2025</p>
+                    </div>
+                </div>
+
+                <!-- 科目 写 -->
+                <div class="best-test-sub">
+                    <div class="best-test-sub-title">
+                        <i class="iconfont icon-bi1"></i>
+                        <span>Writing</span>
+                    </div>
+
+                    <div class="best-test-sub-content">
+                        <p>26</p>
+                        <span>Out of 30</span>
+                    </div>
+                    <div class="best-test-sub-data-info">
+                        <p class="best-test-sub-date">Test Date</p>
+                        <p class="best-test-sub-date-desc">October 15, 2025</p>
+                    </div>
+                </div>
+            </div>    
+        </div>
+
+        <!-- 返回首页按钮 -->
+        <div class="bt-back">
+            <button>
+                <!-- <a href="#">Return to Home</a> -->
+                <a href="#">Send scores to additional Institutions</a>
+                <i class="iconfont icon-xiangyou"></i>
+            </button>
+        </div>
+
+        <div class="pdf">
+            <button class="bt-pdf">
+                <i class="iconfont icon-file-download-line"></i>
+                <span>Print/Download PDF Format</span>
+            </button>
+        </div>
+    </main>
+
+
+    <style>
+        /* 提示弹窗样式 */
+        .toast-notification {
+            position: fixed;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 300px;
+            text-align: center;
+            word-wrap: break-word;
+        }
+        
+        .toast-notification.show {
+            opacity: 1;
+        }
+    </style>
+
+    <script>
+        // 获取进度条元素
+        const progressElement = document.querySelector('.progress-foreground');
+        const progressText = document.querySelector('.progress-text');
+        
+        // 设置进度值 (0-100)
+        const progressValue = 94;
+        
+        // 计算圆弧长度
+        const radius = 40; // 圆弧半径
+        const circumference = Math.PI * radius; // 半圆弧长 = πr
+        
+        // 计算已完成部分的弧长
+        const progressLength = (progressValue / 120) * circumference;
+        
+        // 设置SVG的stroke-dasharray和stroke-dashoffset
+        // stroke-dasharray: 虚线模式，第一个值是实线长度，第二个值是间隔长度
+        // stroke-dashoffset: 虚线起始偏移量
+        progressElement.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressElement.style.strokeDashoffset = circumference - progressLength;
+        
+        // 更新中心文本
+        progressText.textContent = `${progressValue}`;
+        
+        // 显示提示弹窗的函数
+        function showToast(message, buttonElement) {
+            // 创建弹窗元素
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            toast.textContent = message;
+            
+            // 获取按钮的位置
+            const buttonRect = buttonElement.getBoundingClientRect();
+            
+            // 设置弹窗位置 - 在按钮上方20px
+            toast.style.top = (buttonRect.top - 20 - toast.offsetHeight) + 'px';
+            toast.style.left = (buttonRect.left + (buttonRect.width - 200) / 2) + 'px';
+            
+            // 添加到页面
+            document.body.appendChild(toast);
+            
+            // 显示弹窗
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // 1秒后自动消失
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 1000);
+        }
+        
+        // 为.bt-back按钮添加点击事件
+        document.querySelector('.bt-back button').addEventListener('click', function(e) {
+            e.preventDefault(); // 阻止默认行为
+            showToast('网络繁忙，请稍后再试', this);
+        });
+        
+        // 为.pdf按钮添加点击事件
+        document.querySelector('.pdf button').addEventListener('click', function(e) {
+            e.preventDefault(); // 阻止默认行为
+            showToast('网络繁忙，请稍后再试', this);
+        });
+    </script>
+</body>
+</html>

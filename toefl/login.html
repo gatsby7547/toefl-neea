@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://toefl.neea.cn/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://at.alicdn.com">
+    <link rel="preload" href="img/login_bg.png" as="image">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_5034223_7dimeuvenrs.css" media="print" onload="this.media='all'">
+    <title>首页 - 教育部教育考试院托福网上报名</title>
+    <style>
+        /* 移动端适配样式 - 使用类选择器 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 关键CSS - 首屏内容样式 */
+        .page-body, nav, .nav-contact, .nav-logo {
+            display: block;
+        }
+        
+        .page-body {
+            /* 页面四边间距设置 */
+            padding: 20px;
+            background-color: #FFF;
+        }
+
+        /* 顶部联系信息容器 */
+        .nav-contact {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        /* 联系信息 内容 */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        /* 联系信息 图标*/
+        .contact-icon {
+            margin-right: 5px;
+        }
+        
+        /* 联系信息 链接 */
+        .contact-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 15px;
+            font-weight: 800; /* 联系我们字体加粗 */
+        }
+
+        /* 背景logo容器 - 添加flex布局让logo并排显示 */
+        .bg-logo {
+            display: flex; /* 使用flex布局 */
+            align-items: center; /* 垂直居中对齐 */
+            gap: 10px; /* logo之间的间距 */
+        }
+        
+        /* 背景logo */
+        .logo-neea img {
+            width: 65px;
+            height: 75px;
+            object-fit: cover;
+        }
+        .logo-ets img { 
+            width: 200px;
+            height: 75px;
+            object-fit: cover;
+        }
+
+        /* Logo标题 - 标题 */
+        .logo-title {
+            display: block;
+            text-align: left; /* 左对齐 */
+            font-size: 14px;
+            font-weight: 800; /* 字体加粗 */
+            clear: #000;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* 导航菜单 */
+        .nav-menu { 
+            display: flex; /* 使用flex布局 */
+            justify-content: flex-start; /* 菜单左对齐 */
+            gap: 20px; /* 菜单项之间的间距 */
+        }
+        /* 导航菜单 列表项 */
+        .nav-menu li {
+            display: inline-block;
+            width: 100%;
+            list-style: none; /* 去掉列表项的默认样式 */
+            background-color: #9396FF;
+            padding: 15px 5px;
+            border: 1px solid #fff;
+        }
+
+        /* 导航菜单 链接 */
+        .nav-link { 
+            /* display: block; */
+            padding: 15px 5px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        /* 菜单项 链接样式 */
+        .nav-menu li i {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* 版心 */
+        .main {
+            max-width: 1200px;
+            margin: 8px auto;
+            /* padding: 20px; */
+            background-color: #fff;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        /* 版心 - 背景图片 */
+        .bg-img { 
+            background-image: url(img/login_bg.png);
+            background-size: cover;
+            width: 100%;
+            height: 500px;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            will-change: transform;
+        }
+
+        /* 登录 */
+        .login-form {
+            background-color: #fff;
+            background-image: url(img/shan.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 80% 100%;
+            border: none;
+            width: 100%;
+            /* height: 380px; */
+            padding-top: 2.5em;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .login-form h1 { 
+            display: inline-block;
+            width: 5em;
+            font-size: 22px;
+            font-weight: 800;
+            color: rgb(0, 0, 0);
+            margin-bottom: 20px;
+            margin-left: 25px;
+            text-align: left;
+        }
+
+        /* 登录表单容器 - 居中显示 */
+        .form-content {
+            align-items: center; /* 水平居中 */
+            /* justify-content: center; */
+            /* min-width: 300px; 设置最小宽度 */
+            /* max-width: 400px; 设置最大宽度 */
+            margin: 10px auto;
+        }
+
+        .form-item { 
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+            /* justify-content: flex-start; 左对齐 */
+            margin-bottom: 15px; /* 增加间距 */
+            width: 100%; /* 占满容器宽度 */
+            gap: 1em; /* label和input之间的间距 */
+            border: none;
+        }
+
+        .form-item label { 
+            font-size: 15px;
+            font-weight: 500;
+            color: rgb(0, 0, 0);
+            min-width: 60px; /* 固定label宽度，保持对齐 */
+            text-align: right; /* 左对齐 */
+            width: 6em;
+        }
+
+        .form-item input { 
+            /* flex: 1; 输入框占据剩余空间 */
+            width: 50%;
+            height: 30px;
+            font-size: 15px;
+            padding: 5px 5px;
+            border: 1px solid #ccc;
+            background-color: rgb(218, 220, 255);
+            /* min-width: 150px; 输入框最小宽度 */
+            letter-spacing: -.5px;
+            border: 1px solid #CCCCCC;
+        }
+        .form-item input:focus { 
+            outline: none; /* 去掉聚焦时的边框 */
+            border: 1px solid #CCC;
+        }
+        .form-item input::placeholder { 
+            color: #000; /* 输入框提示文字颜色 */
+            font-size: 16px;
+            font-weight: 500;
+            margin-left: 1em;
+        }
+
+        .captcha-item {
+            margin-left: 6.5em;
+            margin-bottom: 10px; /* 增加间距 */
+            /* width: 100%; 占满容器宽度 */
+            gap: 5px; /* label和input之间的间距 */
+            border: none;
+            /* 新增：默认隐藏验证码图片和提示 */
+            display: none;
+        }
+        
+        .captcha-img {
+            /* width: 96px; 验证码图片宽度 */
+            height: 30px; /* 验证码图片高度与输入框一致 */
+            border: none; /* 添加边框 */
+            background-color: #f0f0f0; /* 验证码图片背景色 */
+            cursor: pointer;
+            margin-bottom: 0px;
+        }
+        .change-captcha {
+            display: block;
+            font-size: 13px;
+            font-weight: 400;
+            color: rgb(0, 0, 0);
+            margin-top: 0px;
+        }
+
+        /* 新增：登录按钮和忘记密码容器样式 */
+        .form-actions {
+            display: flex; /* 使用flex布局使登录按钮和忘记密码并排显示 */
+            align-items: center; /* 垂直居中 */
+            margin-left: 6.5em; /* 与上方输入框左对齐 */
+            margin-top: 20px; /* 与上方元素间距 */
+            margin-bottom: 20px;
+            gap: .5em; /* 按钮和忘记密码之间的间距 */
+        }
+        
+        /* 修改：登录按钮样式 */
+        .bt-login button {
+            background-color: #000; /* 设置按钮背景颜色为黑色 */
+            color: #FFF; /* 设置文字颜色为白色 */
+            border: none; /* 去掉边框 */
+            padding: 8px 20px; /* 设置内边距 */
+            font-size: 16px; /* 设置字体大小 */
+            font-weight: 600;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+            border-radius: 4px; /* 添加圆角 */
+        }
+        
+        /* 修改：忘记密码链接样式 */
+        .bt-forget {
+            display: flex; /* 使用flex布局 */
+            align-items: center; /* 垂直居中 */
+        }
+        
+        .bt-forget {
+            font-size: 14px; /* 设置字体大小 */
+            color: #000; /* 设置文字颜色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        /* 修改：注册区域样式 */
+        .bt-register {
+            /* display: flex; 使用flex布局 */
+            background-color: #9196FE;
+            text-align: center;
+            width: 100%;
+            height: 70px;
+            margin-top: 30px; /* 与上方元素间距 */
+            margin-bottom: 10px;
+            gap: 5px; /* 文字和链接之间的间距 */
+        }
+        
+        .bt-register h3 {
+            display: inline-block;
+            font-size: 18px; /* 设置字体大小 */
+            font-weight: 500; /* 设置字体粗细 */
+            margin: 0;
+            line-height: 70px;
+        }
+        
+        .bt-register .f-nav-link {
+            display: inline-block;
+            font-size: 18px; /* 设置字体大小 */
+            color: #000; /* 设置文字颜色 */
+            text-decoration: none; /* 去掉下划线 */
+            font-weight: 800; /* 设置字体粗细 */
+            margin: 0;
+        }
+
+        /* 底部区域 */
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        /* 底部导航 区域 */
+        .f-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: rgb(247, 247, 247);
+            border-top: 8px solid rgb(218, 220, 255);
+        }
+        
+        /* 底部导航 内容 */
+        .f-nav-item {
+            padding: 0px auto;
+        }
+        
+        /* 底部导航 链接 */
+        .f-nav-link { 
+            display: block;
+            /* padding: 15px 5px; */
+            text-decoration: none;
+            color: #000;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        hr { 
+            margin-bottom: 20px;
+            clear: #000;
+        }
+
+        /* 底部导航 - 关注区域 */
+        .follow-us { 
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0em;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        
+        /* 社交媒体 图片 */
+        .social-media { 
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0em;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        
+        .copyright { 
+            display: inline-block;
+            margin: 20px auto;
+            font-size: 14px;
+            font-weight: 400;
+            text-align-last: center;
+        }
+    </style>
+</head>
+<body class="page-body">
+    <nav>
+        <!-- 联系信息区域 -->
+        <div class="nav-contact">
+            <div class="contact-item">
+                <i class="iconfont icon-yonghu2 contact-icon"></i>
+                <a href="#" class="contact-link">联系我们</a>
+            </div>
+
+            <div class="contact-item">
+                <i class="iconfont icon-diqiu contact-icon"></i>
+                <a href="#" class="contact-link">English Version</a>
+            </div>
+        </div>
+
+        <!-- 背景logo -->
+        <div class="nav-logo">
+            <div class="bg-logo">
+                <div class="logo-neea">
+                    <a href="#"><img src="img/neealogo.jpg" alt="NEEA Logo" loading="lazy" width="65" height="75"></a>
+                </div>
+                <div class="logo-ets">
+                    <a href="#"><img src="img/ETSlogo.jpg" alt="ETS Logo" loading="lazy" width="200" height="75"></a>
+                </div>
+            </div>
+            <span class="logo-title">教育部教育考试院托福网考®考试报名</span>
+        </div>
+
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <ul>
+                <li>
+                    <i class="iconfont icon-kaoshi"></i>
+                    <a href="#" class="nav-link">考试报名</a>
+                </li>
+                <li>
+                    <i class="iconfont icon-a-qingdanrenwujihua21"></i>
+                    <a href="#" class="nav-link">备考资源</a>
+                </li>
+                <li>
+                    <i class="iconfont icon-wenhao"></i>
+                    <a href="#" class="nav-link">常见问题</a>
+                </li>
+                <li>
+                    <i class="iconfont icon-shiyongwendang"></i>
+                    <a href="#" class="nav-link">表格下载</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 版心 -->
+    <main class="main">
+        <div class="content">
+            <div class="bg-img">
+                <i></i>
+            </div>
+
+            <!-- 登录表单 -->
+            <div class="login-form">
+                <form>
+                    <div class="form-content">
+                        <div class="form-title">
+                            <h1>用户登录</h1>
+                        </div>
+                        <div class="form-item">
+                            <label for="username">用户名</label>
+                            <input type="text" id="username" name="username" placeholder="NEEA ID或邮箱" maxlength="10" required>
+                        </div>
+                        <div class="form-item">
+                            <label for="password">密码</label>
+                            <input type="password" id="password" name="password" maxlength="12" required>
+                        </div>
+                        <div class="form-captcha">
+                            <!-- 修改：添加ID以便JavaScript操作，默认隐藏 -->
+                            <div class="captcha-item" id="captcha-container">
+                                <img src="img/yanzhengma-1.jpg" class="captcha-img" alt="验证码">
+                                <span class="change-captcha">看不清楚？点击图片换一张</span>
+                            </div>
+                            <div class="form-item captcha">
+                                <label for="captcha">验证码</label>
+                                <!-- 修改：添加点击事件监听器 -->
+                                <input type="text" id="captcha" name="captcha" maxlength="4" required onfocus="showCaptcha()">
+                            </div>
+                        </div>
+                        <!-- 修改：添加登录按钮和忘记密码容器 -->
+                        <div class="form-actions">
+                            <div class="bt-login">
+                                <button type="submit">登录</button>
+                            </div>
+                            <div class="bt-forget">
+                                <a href="#" class="f-nav-link">忘记密码？</a>
+                            </div>
+                        </div>
+                        <!-- 修改：注册区域 -->
+                        <div class="bt-register">
+                            <h3>新用户请</h3>
+                            <a href="#" class="f-nav-link">注册</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <!-- 底部导航栏 -->
+        <div class="f-nav">
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">考试报名</a>
+            </div>
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">备考资源</a>
+            </div>
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">常见问题</a>
+            </div>
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">表格下载</a>
+            </div>
+        </div>
+        
+        <hr>
+
+        <!-- 社交图标 - 修改后的结构 -->
+        <div class="social-icons-container">
+            <!-- 关注托福文字 -->
+            <span class="follow-us">关注托福:</span>
+            
+            <!-- 微信图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/weixin2.png" alt="微信" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+            
+            <!-- 小红书图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/xiaohongshu2.png" alt="小红书" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+            
+            <!-- B站图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/bilibili2.png" alt="B站" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+            
+            <!-- 抖音图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/douyin.png" alt="抖音" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div>
+                Copyright © 2025 ETS. TOEFL, TOEFL iBT, 托福，托福网考 and MYBEST are registered trademarks of ETS in the United States and other countries. The Eight-Point logo and TOEFL TestReady are trademarks of ETS.
+            </div>
+            <div>
+                All are used under license in the People's Republic of China by the National Education Examination Authority pursuant to a license from Educational Testing Service.
+                <b>教育部教育考试院版权所有 保留所有权利</b>
+                Powered By: OE4176U2
+            </div>
+        </div>
+    </footer>
+
+    <!-- 新增：JavaScript代码 -->
+    <script defer>
+        // 显示验证码图片和文字提示的函数
+        function showCaptcha() {
+            // 获取验证码容器元素
+            var captchaContainer = document.getElementById('captcha-container');
+            // 显示验证码容器
+            captchaContainer.style.display = 'block';
+        }
+        
+        // 登录验证功能
+        let remainingAttempts = 5; // 剩余尝试次数
+        
+        // 创建错误提示条
+        function createErrorBanner(message) {
+            // 移除现有的错误提示条
+            const existingBanner = document.getElementById('error-banner');
+            if (existingBanner) {
+                existingBanner.remove();
+            }
+            
+            // 创建新的错误提示条
+            const errorBanner = document.createElement('div');
+            errorBanner.id = 'error-banner';
+            errorBanner.style.cssText = `
+                background-color: #F2DEE0;
+                width: 100%;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding-left: 20px;
+                font-size: 16px;
+                font-weight: 400;
+                margin-bottom: 15px;
+                border: 1px solid #DCA7B0;
+            `;
+            errorBanner.textContent = message;
+            
+            // 插入到用户登录标题和用户名输入框之间
+            const formTitle = document.querySelector('.form-title');
+            const formContent = document.querySelector('.form-content');
+            formContent.insertBefore(errorBanner, formTitle.nextSibling);
+        }
+        
+        // 登录表单提交处理
+        function handleLogin(event) {
+            event.preventDefault(); // 阻止表单默认提交
+            
+            // 获取输入值
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const captcha = document.getElementById('captcha').value.trim();
+            
+            // 验证码不区分大小写
+            const correctCaptcha = 'dksw';
+            const isCaptchaCorrect = captcha.toLowerCase() === correctCaptcha.toLowerCase();
+            
+            // 验证码验证
+            if (!isCaptchaCorrect) {
+                createErrorBanner('验证码错误，请重新输入');
+                return;
+            }
+            
+            // 用户名和密码验证
+            const correctUsername = '21782020';
+            const correctPassword = '205919713@yY';
+            const isUsernameCorrect = username === correctUsername;
+            const isPasswordCorrect = password === correctPassword;
+            
+            if (!isUsernameCorrect || !isPasswordCorrect) {
+                remainingAttempts--;
+                
+                if (remainingAttempts > 0) {
+                    createErrorBanner(`用户名或密码错误，您还可以尝试${remainingAttempts}次`);
+                } else {
+                    createErrorBanner('您的请求次数过于频繁，请稍候再试');
+                    // 禁用登录按钮
+                    document.querySelector('.bt-login button').disabled = true;
+                }
+                return;
+            }
+            
+            // 登录成功，跳转到home-1.html
+            window.location.href = 'home-1.html';
+        }
+        
+        // 页面加载完成后绑定事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('form');
+            loginForm.addEventListener('submit', handleLogin);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://toefl.neea.cn/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://at.alicdn.com">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_5034223_7dimeuvenrs.css" media="print" onload="this.media='all'">
+    <title>首页 - 教育部教育考试院托福网上报名</title>
+    <style>
+        /* 移动端适配样式 - 使用类选择器 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .page-body {
+            /* 页面四边间距设置 */
+            padding: 20px;
+            background-color: #FFF;
+        }
+
+        /* 顶部联系信息容器 */
+        .nav-contact {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        /* 联系信息 内容 */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        /* 联系信息 图标*/
+        .contact-icon {
+            margin-right: 5px;
+        }
+        
+        /* 联系信息 链接 */
+        .contact-link {
+            text-decoration: none;
+            color: #000;
+            font-size: 15px;
+            font-weight: 800; /* 联系我们字体加粗 */
+        }
+
+        /* 背景logo容器 - 添加flex布局让logo并排显示 */
+        .bg-logo {
+            display: flex; /* 使用flex布局 */
+            align-items: center; /* 垂直居中对齐 */
+            gap: 10px; /* logo之间的间距 */
+        }
+        
+        /* 背景logo */
+        .logo-neea img {
+            width: 65px;
+            height: 75px;
+            object-fit: cover;
+        }
+        .logo-ets img { 
+            width: 200px;
+            height: 75px;
+            object-fit: cover;
+        }
+
+        /* Logo标题 - 标题 */
+        .logo-title {
+            display: block;
+            text-align: left; /* 左对齐 */
+            font-size: 14px;
+            font-weight: 800; /* 字体加粗 */
+            clear: #000;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* 导航菜单 */
+        .nav-menu { 
+            display: flex; /* 使用flex布局 */
+            justify-content: flex-start; /* 菜单左对齐 */
+            gap: 20px; /* 菜单项之间的间距 */
+        }
+        /* 导航菜单 列表项 */
+        .nav-menu li {
+            display: inline-block;
+            width: 100%;
+            list-style: none; /* 去掉列表项的默认样式 */
+            background-color: #9396FF;
+            padding: 15px 5px;
+            border: 1px solid #fff;
+        }
+
+        /* 导航菜单 链接 */
+        .nav-link { 
+            /* display: block; */
+            padding: 15px 5px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        /* 菜单项 链接样式 */
+        .nav-menu li i {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* 版心 */
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+        .base-info {
+            padding: 20px;
+            position: relative; /* 添加相对定位，使按钮可以相对于此定位 */
+            min-height: 400px; /* 确保有足够高度放置按钮 */
+        }
+        .user-name { 
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .user-name span:last-child {
+            font-size: 16px;
+            font-weight: 500;
+            margin-left: 2em;
+        }
+        .user-id,
+        .user-birth {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .user-id span:last-child,
+        .user-birth span:last-child {
+            font-size: 16px;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+        .qrcode img {
+            width: 67px;
+            height: 67px;
+        }
+        .qrcode span {
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+        
+        /* 修改后的logout按钮样式 */
+        .logout-btn {
+            display: block; /* 独占一行 */
+            width: 100px; /* 适当的宽度 */
+            height: 35px; /* 适当的高度 */
+            background-color: #FF8F60; /* 背景颜色 */
+            border: none; /* 去掉边框 */
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+            position: absolute; /* 绝对定位 */
+            right: 20px; /* 右侧对齐 */
+            bottom: 20px; /* 底部对齐 */
+            display: flex; /* 使用flex布局排列内部元素 */
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            gap: 2px; /* 图标和文字之间的间距 */
+            margin-top: 50px;
+        }
+        
+        /* 按钮内的图标和文字样式 */
+        .logout-btn i,
+        .logout-btn a {
+            font-size: 14px; /* 字体大小 */
+            color: #000; /* 颜色 */
+        }
+        
+        .logout-btn a {
+            text-decoration: none; /* 去掉下划线 */
+            font-weight: 600; /* 设置字体粗细 */
+        }
+
+        /* 底部区域 */
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        /* 底部导航 区域 */
+        .f-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: rgb(247, 247, 247);
+            border-top: 8px solid rgb(218, 220, 255);
+        }
+        
+        /* 底部导航 内容 */
+        .f-nav-item {
+            padding: 0px auto;
+        }
+        
+        /* 底部导航 链接 */
+        .f-nav-link { 
+            display: block;
+            /* padding: 15px 5px; */
+            text-decoration: none;
+            color: #000;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        hr { 
+            margin-bottom: 20px;
+            clear: #000;
+        }
+
+        /* 底部导航 - 关注区域 */
+        .follow-us { 
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0em;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        
+        /* 社交媒体 图片 */
+        .social-media { 
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0em;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        
+        .copyright { 
+            display: inline-block;
+            margin: 20px auto;
+            font-size: 14px;
+            font-weight: 400;
+            text-align-last: center;
+        }
+
+        .check-score {
+            padding: 20px;
+            margin: 20px auto;
+        }
+        .check-score h2 {
+            font-size: 23px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        .check-score-btn {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .check-score-btn button {
+            /* width: 100px; */
+            height: 35px;
+            padding: 5px 10px;
+            background-color: #000;
+            border: none;
+            cursor: pointer;
+        }
+        .check-score-btn button a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="page-body">
+    <nav>
+        <!-- 联系信息区域 -->
+        <div class="nav-contact">
+            <div class="contact-item">
+                <i class="iconfont icon-yonghu2 contact-icon"></i>
+                <a href="#" class="contact-link">联系我们</a>
+            </div>
+
+            <div class="contact-item">
+                <i class="iconfont icon-diqiu contact-icon"></i>
+                <a href="#" class="contact-link">English Version</a>
+            </div>
+        </div>
+
+        <!-- 背景logo -->
+        <div class="nav-logo">
+            <div class="bg-logo">
+                <div class="logo-neea">
+                    <a href="#"><img src="img/neealogo.jpg" alt="NEEA Logo" loading="lazy" width="65" height="75"></a>
+                </div>
+                <div class="logo-ets">
+                    <a href="#"><img src="img/ETSlogo.jpg" alt="ETS Logo" loading="lazy" width="200" height="75"></a>
+                </div>
+            </div>
+            <span class="logo-title">教育部教育考试院托福网考®考试报名</span>
+        </div>
+
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <ul>
+                <li>
+                    <i class="iconfont icon-kaoshi"></i>
+                    <a href="#" class="nav-link">考试报名</a>
+                </li>
+                <li>
+                    <i class="iconfont icon-a-qingdanrenwujihua21"></i>
+                    <a href="#" class="nav-link">备考资源</a>
+                </li>
+                <li>
+                    <i class="iconfont icon-wenhao"></i>
+                    <a href="#" class="nav-link">常见问题</a>
+                </li>
+                <li>
+                    <i class="iconfont icon-shiyongwendang"></i>
+                    <a href="#" class="nav-link">表格下载</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="base-info">
+            <div class="user-name">
+                <span>杨宇霞，YANG YUXIA</span>
+                <span>欢迎登录教育部教育考试院托福网考"考试报名网站</span>
+            </div>
+
+            <div class="user-id">
+                <div>
+                    <span>NEEA ID:</span>
+                    <span>21782020</span>
+                </div>
+                <div>
+                    <span>ETS ID:</span>
+                    <span>33GG2FH5</span>
+                </div>
+                <div>
+                    <span>账户余额:</span>
+                    <span>RMB¥23.00</span>
+                </div>
+            </div>
+            
+            <div class="user-birth">
+                <div>
+                    <span>性别:</span>
+                    <span>女</span>
+                </div>
+                <div>
+                    <span>出生年月日:</span>
+                    <span>2001-02-05</span>
+                </div>
+            </div>
+
+            <div class="qrcode">
+                <img src="img/erweima.png" alt="托福官方福利官二维码" loading="lazy" width="67" height="67">
+                <span>扫码添加【托福官方福利官】微信，领取备考资料，获取托福考试一手信息。</span>
+            </div>
+            
+            <button class="logout-btn">
+                <i class="iconfont icon-tuichudenglu"></i>
+                <a href="login.html">退出登录</a>
+            </button>
+        </div>
+
+    </main>
+
+    <div class="check-score">
+        <div>
+            <h2>
+                获取成绩单
+            </h2>
+        </div>
+        <div class="check-score-btn">
+            <div>
+                <button>
+                    <a href="score.html">查看PDF</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <!-- 底部导航栏 -->
+        <div class="f-nav">
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">考试报名</a>
+            </div>
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">备考资源</a>
+            </div>
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">常见问题</a>
+            </div>
+            <div class="f-nav-item">
+                <a href="#" class="f-nav-link">表格下载</a>
+            </div>
+        </div>
+        
+        <hr>
+
+        <!-- 社交图标 - 修改后的结构 -->
+        <div class="social-icons-container">
+            <!-- 关注托福文字 -->
+            <span class="follow-us">关注托福:</span>
+            
+            <!-- 微信图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/weixin2.png" alt="微信" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+            
+            <!-- 小红书图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/xiaohongshu2.png" alt="小红书" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+            
+            <!-- B站图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/bilibili2.png" alt="B站" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+            
+            <!-- 抖音图标 -->
+            <div class="social-media">
+                <a href="#">
+                    <img src="img/douyin.png" alt="抖音" loading="lazy" width="32" height="32">
+                </a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div>
+                Copyright © 2025 ETS. TOEFL, TOEFL iBT, 托福，托福网考 and MYBEST are registered trademarks of ETS in the United States and other countries. The Eight-Point logo and TOEFL TestReady are trademarks of ETS.
+            </div>
+            <div>
+                All are used under license in the People's Republic of China by the National Education Examination Authority pursuant to a license from Educational Testing Service.
+                <b>教育部教育考试院版权所有 保留所有权利</b>
+                Powered By: OE4176U2
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
